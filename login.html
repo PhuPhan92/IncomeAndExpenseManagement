@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="shortcut icon" href="./image/avatar.png" type="image/x-icon">
+</head>
+<body>
+  <div class="login_form">
+    <h1>ĐĂNG NHẬP</h1>
+    <form action="">
+      <div class = container>
+        <img src="./image/avatar.png" alt="avartar" >
+        <label for=""><p>User Name</p> </label>
+        <input type="text" id ="username"name="username" placeholder="Tên đăng nhập" required>
+        <label for=""><p>Password</p> </label>
+        <input type="password"  id="password" name="password" placeholder="Mật khẩu" required>
+        <input type="button" value="Đăng nhập" onclick="login()">
+        <label for="" class="login_checkbox"><input type="checkbox" name="rememberme" > Remember me</label>
+      </div>
+      <div class="clear_container clearfix" >
+        <input type="reset" class="cancelbtn" value="Cancle"></input>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>  
+    </form>
+  </div>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      
+    }
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color:rgba(0,0,0,0.7);
+      position: relative;
+      text-align: center;
+      width: 100%;
+    }
+    .login_form{
+      width: 600px;
+      padding: 16px;
+      background-color: #fff;
+      position: absolute;
+      display: inline-block;
+      top: 50px;
+      left:calc(50% - 300px);
+    }
+    h1{
+      letter-spacing: 4px;
+    }
+    img{
+      padding: 8px;
+    }
+    p{
+      font-size: 22px;
+      padding: 4px; 
+      font-weight: 700;
+      text-align: left ;
+    } 
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 8px;
+    }
+    input[type = 'button']:hover,
+    .cancelbtn:hover {
+      opacity: 0.7;
+    }
+    input[type = 'button']{
+      width: 100%;
+      padding: 16px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #33CCFF;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+    .login_checkbox{
+      padding: 10px;
+      display: block;
+      text-align: left;
+      font-size: 20px;
+    }
+    .clear_container{
+      background-color: #DDDDDD;
+    }
+    .cancelbtn{
+      width: fit-content;
+      padding: 16px;
+      margin: 12px 8px;
+      background-color: #FF0000 ;
+      font-size: 24px;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      float:left;
+    } 
+    .psw{
+      font-size: 20px;
+      float: right;
+      margin: 22px 12px;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+  </style>
+  <script>
+    function login(){
+      let userName = document.getElementById('username').value;
+      let password = document.getElementById('password').value;
+      let conrrectUser = 'phanphu';
+      let conrrectPass = '123';
+      if (userName == conrrectUser && password == conrrectPass){
+        location.assign("http://127.0.0.1:5500/");
+      }else {alert('pls check user name or password again')
+      }
+    }
+  </script>
+</body>
+</html>

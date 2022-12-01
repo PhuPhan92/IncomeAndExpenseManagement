@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IncomeAndExpenseManagement</title>
+  <link rel="stylesheet" href="./casestudy.css">
+  <link rel="stylesheet" href="./icon/themify-icons-font/themify-icons/themify-icons.css">
+  <link rel="shortcut icon" href="./image/avatar.png" type="image/x-icon">
+</head>
+
+<body>
+  <div id="header" class="clearfix main">
+    <div class="avartar"><img src="./image/avatar.png" alt="avartar" class="avatar_image"></div>
+    <div class="title">
+      <h1> INCOME AND EXPENSE MANAGEMENT</h1>
+    </div>
+    <div class="nav_block">
+      <ul id="nav">
+        <li><a href="#">HOME</a></li>
+        <li><a href="#income">INCOM</a></li>
+        <li><a href="#expense">EXPENSE</a></li>
+        <li>
+          <a href="">STATISTICAL</a>
+          <ul class="subnav">
+            <li><a href="#">Date</a></li>
+            <li><a href="#">Month</a></li>
+            <li><a href="#">Year</a></li>
+            <li><a href="#">Compare</a></li>
+          </ul>
+        </li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- slide -->
+  <div id="slide" class="slideshow-container">
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 3</div>
+      <img src="./image/slide1.jpg" style="width:100%">
+      <div class="text">SaveMoney</div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 3</div>
+      <img src="./image/slide 2.jpg" style="width:100%">
+      <div class="text">Caption Two</div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 3</div>
+      <img src="./image/slide3.jpg" style="width:100%">
+      <div class="text">MoreMoney</div>
+    </div>
+
+  </div>
+  <br>
+  <div style="text-align:center">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- container -->
+  <div id="content">
+    <div class="clearfix main_block">
+      <div class="adding_block">
+        <h3>Incom</h3>
+        <button class="btn add_btn" onclick="openModalIncom()">ADD</button>
+      </div>
+      <div id="income">
+      </div>
+    </div>
+    <div class="clearfix main_block" >
+      <div class="adding_block">
+        <h3>Expense</h3>
+        <button class="btn add_btn" onclick="openModalExpense()">ADD</button>
+      </div>
+      <div id="expense">
+      </div>
+    </div>
+  </div>
+  <!-- expense modal -->
+  <div class="modal hidden" id="modal_expense">
+    <div class="modal_container">
+      <h2>EXPENSE</h2>
+      <form action="">
+        <table class="table">
+          <tr>
+            <th> Date</th>
+            <td><input type="date" name="" id="expense_date"> </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th> Income</th>
+            <th> Value</th>
+            <th> Note</th>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="expense_selection1">
+              </select>
+            </td>
+            <td><input type="text" name="expense_value" id="expense_value1"></td>
+            <td><input type="text" name='note' id="expense_note1"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="expense_selection2">
+              </select>
+            </td>
+            <td><input type="text" name="expense_value" id="expense_value2"></td>
+            <td><input type="text" name='note' id="expense_note2"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="expense_selection3">
+              </select>
+            </td>
+            <td><input type="text" name="expense_value" id="expense_value3"></td>
+            <td><input type="text" name='note' id="expense_note3"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="expense_selection4">
+              </select>
+            </td>
+            <td><input type="text" name="expense_value" id="expense_value4"></td>
+            <td><input type="text" name='note' id="expense_note4"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="expense_selection5">
+              </select>
+            </td>
+            <td><input type="text" name="expense_value" id="expense_value5"></td>
+            <td><input type="text" name='note' id="expense_note5"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="expense_selection6">
+              </select>
+            </td>
+            <td><input type="text" name="expense_value" id="expense_value6"></td>
+            <td><input type="text" name='note' id="expense_note6"></td>
+          </tr>
+        </table>
+      </form>
+      <div class="clearfix btn_area">
+        <button class="btn ok_btn expense_ok_btn" onclick="createExpanse()"> OK</button>
+        <button class="btn cancle_btn" onclick="removeModal()"> Cancle</button>
+        <button class="btn update_btn expense_update_btn hide" onclick="updateExpanse()"> Update</button>
+        <input type="hidden" id="hideExpense" value="0">
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <!-- Incom Modal -->
+  <div class="modal hidden" id="modal_income">
+    <div class="modal_container">
+      <h2>INCOM</h2>
+      <form action="">
+        <table class="table">
+          <tr>
+            <th> Date</th>
+            <td><input type="date" name="" id="incomeDate"> </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th> Income</th>
+            <th> Value</th>
+            <th> Note</th>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="income_selection1">
+              </select>
+            </td>
+            <td><input type="text" name="income_vlue" id="income_value1"></td>
+            <td><input type="text" name='note' id = "income_note1"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="income_selection2">
+              </select>
+            </td>
+            <td><input type="text" name="income_vlue" id="income_value2"></td>
+            <td><input type="text" name='note' id = "income_note2"></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="" id="income_selection3">
+              </select>
+            </td>
+            <td><input type="text" name="income_vlue" id="income_value3"></td>
+            <td><input type="text" name='note' id = "income_note3"></td>
+          </tr>
+        </table>
+      </form>
+      <div class="clearfix btn_area">
+        <button class="btn ok_btn income_ok_btn" onclick="createIncome()"> OK</button>
+        <button class="btn update_btn income_update_btn hide" onclick="updateIncome()"> Update</button>
+        <button class="btn cancle_btn" onclick="removeModal()"> Cancle</button>
+        <input type="hidden" id="hideIncome" value="0">
+      </div>
+    </div>
+  </div>
+  <!-- Contact -->
+  <div id="contact" class="content-section">
+    <h2 class=" section-heading">CONTACT</h2>
+    <div class="row contact-content">
+      <div class="col col2 s-col-full contact-info">
+        <p><i class="ti-location-pin"></i>Huế - Việt Nam</p>
+        <p><i class="ti-mobile"></i>Phone: +84 xxxxxxxxx</p>
+        <p><i class="ti-email"></i>Email: mail@mail.com</p>
+      </div>
+      <div class="col col2 s-col-full s-mt-16 contact-form">
+        <form action="">
+          <div class="row">
+            <div class="col col2 s-col-full">
+              <input type="text" name="" placeholder="Name" required id="" class="form-control">
+            </div>
+            <div class="col col2 s-col-full s-mt-8 ">
+              <input type="email" name="" placeholder="Email" required id="" class="form-control">
+            </div>
+          </div>
+          <div class="row mt-8">
+            <div class="col colfull ">
+              <input type="text" name="" placeholder="Messenger" required id="" class="form-control">
+            </div>
+          </div>
+          <input type="submit" value="SEND" class="mt-16 form-submit-btn s-btn-fullwidth">
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div id="footer">
+    <div class="social-list">
+      <a href=""><i class="ti-facebook"></i></a>
+      <a href=""><i class="ti-instagram"></i></a>
+      <a href=""><i class="ti-flickr"></i></a>
+      <a href=""><i class="ti-pinterest"></i></a>
+      <a href=""><i class="ti-twitter"></i></a>
+      <a href=""><i class="ti-linkedin"></i></a>
+    </div>
+    <p class="coppyright">Powered by <a href="https://codegym.vn/trung-tam-codegym-hue/">codegym.vn</a></p>
+  </div>
+  <script src="casestudy.js"></script>
+</body>
+
+</html>

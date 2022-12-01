@@ -14,5 +14,5 @@
 
 ## Kết quả
 
-- Link git: https://github.com/khoanguyen84/Staff-Management.git
-- Link sản phẩm: https://khoanguyen84.github.io/Staff-Management/
+- Link git: https://github.com/PhuPhan92/IncomeAndExpenseManagement
+- Link sản phẩm: https://phuphan92.github.io/IncomeAndExpenseManagement/

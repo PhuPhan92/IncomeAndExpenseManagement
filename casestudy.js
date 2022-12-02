@@ -134,11 +134,12 @@ function renderIncome() {
                       <th>Sum: ${income.value1 + income.value2 + income.value3}</th>
                       <th><button class="btn edit_btn" onclick="editIncome(${income.id})">Edit</button></th>
                       <th><button class="btn delete_btn" onclick="deleteIncome(${income.id})">Delete</button></th>
-                      <th><button class="ti-angle-down btn display_btn" onclick="displayIncomeValue()"></button></th>
+                      <th><button class="ti-angle-down btn display_btn" onclick="displayIncomeValue(${income.id})"></button></th>
+                      <th><button class="ti-angle-up btn unDisplay_btn" onclick="unDisplayIncomeValue(${income.id})"></button></th>
                     </tr>
                   </table>
                 </div>
-                <div class="display_block block${income.id}">
+                <div class="display_block incomeBlock${income.id}">
                   <table class="table">
                     <tr>
                       <td>Income</td>
@@ -176,11 +177,12 @@ function renderExpense() {
                       <th>Sum: ${expen.value1 + expen.value2 + expen.value3 + expen.value4 + expen.value5 + expen.value6}</th>
                       <th><button class="btn edit_btn" onclick="editExpense(${expen.id})">Edit</button></th>
                       <th><button class="btn delete_btn" onclick="deleteExpense(${expen.id})">Delete</button></th>
-                      <th><button class="ti-angle-down btn display_btn" onclick="displayValue()"></button></th>
+                      <th><button class="ti-angle-down btn display_btn" onclick="displayExpenseValue(${expen.id})"></button></th>
+                      <th><button class="ti-angle-up btn unDisplay_btn" onclick="unDisplayExpenseValue(${expen.id})"></button></th>
                     </tr>
                   </table>
                 </div>
-                <div class="display_block">
+                <div class="display_block ExpenseBlock${expen.id}">
                   <table class="table">
                     <tr>
                       <td>Expense</td>
@@ -351,7 +353,7 @@ function getMaxExpenseId() {
 }
 // End render and creat Container JS
 
-// find ID, delete, edit JS
+// find ID, delete, edit, dispay vlue block JS
 function selecIncom(incomeId) {
     if (selecIncomeId.includes(incomeId))  {
         selecIncomeId = selecIncomeId.filter(function (id) {
@@ -502,4 +504,16 @@ function updateExpanse(){
     removeModal();
     document.querySelector('.expense_ok_btn').classList.remove('hide');
     document.querySelector('.expense_update_btn').classList.add('hide');
+}
+function displayIncomeValue(incomeID){
+  document.querySelector(`.incomeBlock${incomeID}`).style.display = 'block';
+}
+function unDisplayIncomeValue(incomeID){
+  document.querySelector(`.incomeBlock${incomeID}`).style.display = 'none';
+}
+function displayExpenseValue(expenseID){
+  document.querySelector(`.ExpenseBlock${expenseID}`).style.display = 'block';
+}
+function unDisplayExpenseValue(expenseID){
+  document.querySelector(`.ExpenseBlock${expenseID}`).style.display = 'none';
 }

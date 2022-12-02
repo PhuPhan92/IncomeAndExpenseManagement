@@ -8,6 +8,7 @@
 html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   scroll-behavior: smooth;
+  background-color: #E0F2F1;
 }
 
 .clearfix::after {
@@ -90,25 +91,29 @@ img {
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
+  max-height: 600px;
   position: relative;
   margin: auto;
 }
 
 /* Caption text */
 .text {
-  color: #000;
-  font-size: 15px;
+  color: #F57C00;
+  font-size: 24px;
   padding: 8px 12px;
   position: absolute;
-  bottom: 8px;
+  bottom: 0;
   width: 100%;
   text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: #000;
-  font-size: 12px;
+  color: #F57C00;
+  font-size: 16px;
   padding: 8px 12px;
   position: absolute;
   top: 0;
@@ -181,6 +186,7 @@ img {
   width: 75%;
   float: right;
   min-height: 60px;
+  text-align: center;
 }
 
 #nav {
@@ -238,6 +244,7 @@ img {
   min-width: 160px;
   top: 100%;
   left: 0;
+  text-align: left;
 }
 
 #nav .subnav a {
@@ -267,7 +274,6 @@ img {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  /* display: flex; */
   align-items: center;
   justify-content: center;
 }
@@ -330,13 +336,15 @@ input[type=email] {
 }
 
 .main_block {
-  background-color: #fff;
+  background-color: #E0F2F1;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 .adding_block {
   width: 25%;
   min-height: 200px;
-  background-color: #777777;
+  background-color: #004D40;
   float: left;
   border: 2px solid #fff;
   border-radius: 8px;
@@ -358,28 +366,30 @@ input[type=email] {
 }
 
 .edit_block {
-  background-color: #777777
+  background-color: #004D40;
+  /* transition: height 5s; */
 }
 
+/* .edit_block:hover {
+  height: 70px;
+} */
+
 .display_block {
-  background-color: #ccc;
+  background-color: #B2DFDB;
+  display: none;
+}
+
+.edit_btn,
+.display_btn,
+.delete_btn,
+.add_btn,
+.unDisplay_btn {
+  background-color: #6CCECB;
+  color: #EF7126;
 }
 
 .add_btn {
-  background-color: #00CC00;
-}
-
-.edit_btn {
-  background-color: #3366CC;
-}
-
-.delete_btn {
-  background-color: #FF0000;
-}
-
-.display_btn {
-  background-color: #FFFF33;
-  color: #000;
+  margin: 0 auto;
 }
 
 .display_block table tbody td {

@@ -353,6 +353,7 @@ input[type=email] {
 
 .adding_block h3 {
   text-align: center;
+  margin-top: 12px;
 }
 
 .edit_block,
@@ -390,10 +391,19 @@ input[type=email] {
 
 .add_btn {
   margin: 0 auto;
+  display: block;
+  margin-top: 76px;
 }
 
 .display_block table tbody td {
   padding: 2px 0;
+}
+
+/* Map CSS */
+.map {
+  display: block;
+  padding: 24px;
+  margin-left: calc(100% - 450px);
 }
 
 /* Contact CSS */

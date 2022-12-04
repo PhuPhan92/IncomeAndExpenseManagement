@@ -525,9 +525,10 @@ function unDisplayExpenseValue(expenseID){
   document.querySelector(`.ExpenseBlock${expenseID}`).style.display = 'none';
 }
 // sort value by date
-// function sort(){
-//   incomes.sort(function(income_1, income_2){
-//     return income_1.date - income_2;
-//   })
-//   renderIncome();
-// }
+function incomesort(){
+  incomes.sort(function(incomes1, incomes2){
+    return incomes2.date - incomes1.date;
+  })
+  renderIncome();
+}
+incomesort()

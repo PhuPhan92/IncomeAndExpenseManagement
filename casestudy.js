@@ -1,6 +1,3 @@
-function displayValue() {
-
-};
 // display and close modal JS
 function openModalExpense() {
   document.getElementById('modal_expense').classList.add("show");
@@ -11,10 +8,15 @@ function openModalIncom() {
 function removeModal() {
   document.getElementById('modal_expense').classList.remove("show");
   document.getElementById('modal_income').classList.remove("show");
+  document.querySelector('.income_ok_btn').classList.remove('hide');
+  document.querySelector('.income_update_btn').classList.add('hide');
+  document.querySelector('.expense_ok_btn').classList.remove('hide');
+  document.querySelector('.expense_update_btn').classList.add('hide');
   resetExpanseForm();
   resetIncomeForm();
 }
 // End display and close modal JS
+
 // slide Show JS
 let slideIndex = 0;
 showSlides();
@@ -37,19 +39,10 @@ function showSlides() {
   setTimeout(showSlides, 5000); 
 }
 // End slide Show JS
+
 // render and creat Container JS
+  // Class income
 var incomes = [];
-var expenses = [];
-const expense_db = "expense_db";
-const income_db = "income_db";
-var expenseSelec =[
-  'Food',
-  'Living',
-  'Shopping',
-  'Entertaiment',
-  'Medical',
-  'Other'
-]
 var incomeSelec = [
   'Salary 1',
   'Salary 2',
@@ -57,8 +50,7 @@ var incomeSelec = [
   'Other'
 ]
 var selecIncomeId = [];
-var selecExpenseId = [];
-
+const income_db = "income_db";
 function renderIncomeSelec() {
     let htmls = incomeSelec.map(function (incomeSelec) {
         return `<option value="${incomeSelec}">${incomeSelec}</option>`
@@ -67,19 +59,6 @@ function renderIncomeSelec() {
     document.querySelector('#income_selection2').innerHTML = htmls.join('')
     document.querySelector('#income_selection3').innerHTML = htmls.join('')
   }
-renderIncomeSelec()
-function renderExpenseSelec() {
-    let htmls = expenseSelec.map(function (expenseSelec) {
-        return `<option value="${expenseSelec}">${expenseSelec}</option>`
-    })
-    document.querySelector('#expense_selection1').innerHTML = htmls.join('')
-    document.querySelector('#expense_selection2').innerHTML = htmls.join('')
-    document.querySelector('#expense_selection3').innerHTML = htmls.join('')
-    document.querySelector('#expense_selection4').innerHTML = htmls.join('')
-    document.querySelector('#expense_selection5').innerHTML = htmls.join('')
-    document.querySelector('#expense_selection6').innerHTML = htmls.join('')
-}
-renderExpenseSelec()
 class Income {
   constructor(id,date, income1, income2, income3, value1, value2, value3, note1, note2, note3){
     this.id = id
@@ -96,34 +75,6 @@ class Income {
 
   }
 }
-class Expense{
-  constructor(id,date, expense1,expense2,expense3,expense4,expense5,expense6, value1, value2, value3, value4,value5,value6, note1, note2, note3, note4, note5, note6 ){
-    this.id = id;
-    this.date = date;
-    this.expense1 = expense1;
-    this.expense2 = expense2;
-    this.expense3 = expense3;
-    this.expense4 = expense4;
-    this.expense5 = expense5;
-    this.expense6 = expense6;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
-    this.value4 = value4;
-    this.value5 = value5;
-    this.value6 = value6;
-    this.note1 = note1;
-    this.note2 = note2;
-    this.note3 = note3;
-    this.note4 = note4;
-    this.note5 = note5;
-    this.note6 = note6;
-  }
-}
-expenseInit();
-incomeInit();
-renderExpense();
-renderIncome();
 function renderIncome() {
     let htmls = incomes.map(function (income) {
         return `
@@ -166,6 +117,105 @@ function renderIncome() {
     })
 
     document.getElementById('income').innerHTML = htmls.join("");
+}
+function resetIncomeForm(){
+    document.querySelector('#incomeDate').value = ""
+    document.querySelector('#income_selection1').value = ""
+    document.querySelector('#income_selection2').value = ""
+    document.querySelector('#income_selection3').value = ""
+    document.querySelector('#income_value1').value = ""
+    document.querySelector('#income_value2').value = ""
+    document.querySelector('#income_value3').value = ""
+    document.querySelector('#income_note1').value = ""
+    document.querySelector('#income_note2').value = ""
+    document.querySelector('#income_note3').value = ""
+    renderIncomeSelec();
+}
+function createIncome() {
+    let date = document.querySelector('#incomeDate').value;
+    let income1 = document.querySelector('#income_selection1').value;
+    let income2 = document.querySelector('#income_selection2').value;
+    let income3 = document.querySelector('#income_selection3').value;
+    let value1 = +document.querySelector('#income_value1').value;
+    let value2 = +document.querySelector('#income_value2').value;
+    let value3 = +document.querySelector('#income_value3').value;
+    let note1 = document.querySelector('#income_note1').value;
+    let note2 = document.querySelector('#income_note2').value;
+    let note3 = document.querySelector('#income_note3').value;
+    let id = getMaxIncomeId() + 1;
+    incomes.push(new Income(id,date, income1, income2, income3, value1, value2, value3, note1, note2, note3));
+    renderIncome()
+    resetIncomeForm()
+    removeModal()
+    localStorage.setItem(income_db, JSON.stringify(incomes));
+}
+function incomeInit(){
+  if(localStorage.getItem(income_db) == null){
+      incomes = [
+        new Income(1,"10-15-2022","Salary 1","Salary 2","Bonus", 7500000,6000000,3500000,"October main salary", "October sub salary",""),
+        new Income(2,"10-31-2022","Salary 1","Salari2","Other", 9000000,5000000,4000000,"October main salari", "October sub salari","")
+      ]
+      localStorage.setItem(income_db, JSON.stringify(incomes));
+    }
+    else{
+        incomes = JSON.parse(localStorage.getItem(income_db));
+    }
+}
+function getMaxIncomeId() {
+    let max = 0;
+    for (let i = 0; i < incomes.length; i++) {
+        if (incomes[i].id > max) {
+            max = incomes[i].id
+        }
+    }
+    return max;
+}
+  // Class Expense
+var expenses = [];
+var expenseSelec =[
+  'Food',
+  'Living',
+  'Shopping',
+  'Entertaiment',
+  'Medical',
+  'Other'
+]
+var selecExpenseId = [];
+const expense_db = "expense_db";
+function renderExpenseSelec() {
+    let htmls = expenseSelec.map(function (expenseSelec) {
+        return `<option value="${expenseSelec}">${expenseSelec}</option>`
+    })
+    document.querySelector('#expense_selection1').innerHTML = htmls.join('')
+    document.querySelector('#expense_selection2').innerHTML = htmls.join('')
+    document.querySelector('#expense_selection3').innerHTML = htmls.join('')
+    document.querySelector('#expense_selection4').innerHTML = htmls.join('')
+    document.querySelector('#expense_selection5').innerHTML = htmls.join('')
+    document.querySelector('#expense_selection6').innerHTML = htmls.join('')
+}
+class Expense{
+  constructor(id,date, expense1,expense2,expense3,expense4,expense5,expense6, value1, value2, value3, value4,value5,value6, note1, note2, note3, note4, note5, note6 ){
+    this.id = id;
+    this.date = date;
+    this.expense1 = expense1;
+    this.expense2 = expense2;
+    this.expense3 = expense3;
+    this.expense4 = expense4;
+    this.expense5 = expense5;
+    this.expense6 = expense6;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+    this.value4 = value4;
+    this.value5 = value5;
+    this.value6 = value6;
+    this.note1 = note1;
+    this.note2 = note2;
+    this.note3 = note3;
+    this.note4 = note4;
+    this.note5 = note5;
+    this.note6 = note6;
+  }
 }
 function renderExpense() {
     let htmls = expenses.map(function (expen) {
@@ -225,38 +275,6 @@ function renderExpense() {
 
     document.getElementById('expense').innerHTML = htmls.join("");
 }
-
-function resetIncomeForm(){
-    document.querySelector('#incomeDate').value = ""
-    document.querySelector('#income_selection1').value = ""
-    document.querySelector('#income_selection2').value = ""
-    document.querySelector('#income_selection3').value = ""
-    document.querySelector('#income_value1').value = ""
-    document.querySelector('#income_value2').value = ""
-    document.querySelector('#income_value3').value = ""
-    document.querySelector('#income_note1').value = ""
-    document.querySelector('#income_note2').value = ""
-    document.querySelector('#income_note3').value = ""
-    renderIncomeSelec();
-}
-function createIncome() {
-    let date = document.querySelector('#incomeDate').value;
-    let income1 = document.querySelector('#income_selection1').value;
-    let income2 = document.querySelector('#income_selection2').value;
-    let income3 = document.querySelector('#income_selection3').value;
-    let value1 = +document.querySelector('#income_value1').value;
-    let value2 = +document.querySelector('#income_value2').value;
-    let value3 = +document.querySelector('#income_value3').value;
-    let note1 = document.querySelector('#income_note1').value;
-    let note2 = document.querySelector('#income_note2').value;
-    let note3 = document.querySelector('#income_note3').value;
-    let id = getMaxIncomeId() + 1;
-    incomes.push(new Income(id,date, income1, income2, income3, value1, value2, value3, note1, note2, note3));
-    renderIncome()
-    resetIncomeForm()
-    removeModal()
-    localStorage.setItem(income_db, JSON.stringify(incomes));
-}
 function expenseInit(){
     if(localStorage.getItem(expense_db) == null){
       expenses = [
@@ -270,18 +288,6 @@ function expenseInit(){
     }
     else{
         expenses = JSON.parse(localStorage.getItem(expense_db));
-    }
-}
-function incomeInit(){
-  if(localStorage.getItem(income_db) == null){
-      incomes = [
-        new Income(1,"10-15-2022","Salary 1","Salary 2","Bonus", 7500000,6000000,3500000,"October main salary", "October sub salary",""),
-        new Income(2,"10-31-2022","Salary 1","Salari2","Other", 9000000,5000000,4000000,"October main salari", "October sub salari","")
-      ]
-      localStorage.setItem(income_db, JSON.stringify(incomes));
-    }
-    else{
-        incomes = JSON.parse(localStorage.getItem(income_db));
     }
 }
 function resetExpanseForm(){
@@ -333,15 +339,6 @@ function createExpanse() {
     removeModal()
     localStorage.setItem(expense_db, JSON.stringify(expenses));
 }
-function getMaxIncomeId() {
-    let max = 0;
-    for (let i = 0; i < incomes.length; i++) {
-        if (incomes[i].id > max) {
-            max = incomes[i].id
-        }
-    }
-    return max;
-}
 function getMaxExpenseId() {
     let max = 0;
     for (let j = 0; j < expenses.length; j++) {
@@ -351,19 +348,25 @@ function getMaxExpenseId() {
     }
     return max;
 }
+renderIncomeSelec();
+renderExpenseSelec();
+expenseInit();
+incomeInit();
+renderExpense();
+renderIncome();
 // End render and creat Container JS
 
 // find ID, delete, edit, dispay vlue block JS
+  // Class income
 function selecIncom(incomeId) {
     if (selecIncomeId.includes(incomeId))  {
         selecIncomeId = selecIncomeId.filter(function (id) {
             return id != incomeId;
-        }) //
+        }) 
     }
     else {
         selecIncomeId.push(incomeId);
     }
-    // alert(selecIncomeId);
 }
 function deleteIncome(incomeId) {
     selecIncom(incomeId)
@@ -421,7 +424,9 @@ function updateIncome(){
     document.querySelector('.income_ok_btn').classList.remove('hide');
     document.querySelector('.income_update_btn').classList.add('hide');
 }
-function selecIncom(expenseId) {
+
+  // Class Expense
+function selecExpense(expenseId) {
     if (selecExpenseId.includes(expenseId))  {
         selecExpenseId = selecExpenseId.filter(function (id) {
             return id != expenseId;
@@ -433,15 +438,16 @@ function selecIncom(expenseId) {
     // alert(selecIncomeId);
 }
 function deleteExpense(expenseId) {
-    selecIncom(expenseId)
+  debugger
+    selecExpense(expenseId)
     let confirmed = window.confirm("Are you sure to remove expense?");
     if (confirmed) {
       for (let id of selecExpenseId) {
         expenses = expenses.filter(function (expense) {
         return expense.id != id;
-        })
+        });
       }
-    localStorage.setItem(expense_db, JSON.stringify(expenses));;
+    localStorage.setItem(expense_db, JSON.stringify(expenses));
     renderExpense();
     selecExpenseId = [];
     }
@@ -505,6 +511,7 @@ function updateExpanse(){
     document.querySelector('.expense_ok_btn').classList.remove('hide');
     document.querySelector('.expense_update_btn').classList.add('hide');
 }
+// display or undispay display block
 function displayIncomeValue(incomeID){
   document.querySelector(`.incomeBlock${incomeID}`).style.display = 'block';
 }
@@ -517,3 +524,10 @@ function displayExpenseValue(expenseID){
 function unDisplayExpenseValue(expenseID){
   document.querySelector(`.ExpenseBlock${expenseID}`).style.display = 'none';
 }
+// sort value by date
+// function sort(){
+//   incomes.sort(function(income_1, income_2){
+//     return income_1.date - income_2;
+//   })
+//   renderIncome();
+// }

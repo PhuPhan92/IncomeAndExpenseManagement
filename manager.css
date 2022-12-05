@@ -399,12 +399,17 @@ input[type=email] {
   padding: 2px 0;
 }
 
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
 /* Map CSS */
-.map {
+/* .map {
   display: block;
   padding: 24px;
   margin-left: calc(100% - 450px);
-}
+} */
 
 /* Contact CSS */
 .section-heading {

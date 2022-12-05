@@ -313,6 +313,7 @@ function resetExpanseForm(){
     renderExpenseSelec();
 }
 function createExpanse() {
+
     let date = document.querySelector('#expense_date').value;
     let expense1 = document.querySelector('#expense_selection1').value;
     let expense2 = document.querySelector('#expense_selection2').value;
